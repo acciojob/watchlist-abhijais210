@@ -9,7 +9,7 @@ import java.util.List;
 public class MovieService {
 
     //check if movie already exist in List other wise add it in to List
-    MovieRepository mr = new MovieRepository();
+    public MovieRepository mr = new MovieRepository();
     public  void addMovie(Movie movie) {
         mr.addMovie(movie);
     }

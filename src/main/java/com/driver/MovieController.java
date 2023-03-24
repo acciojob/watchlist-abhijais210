@@ -11,47 +11,47 @@ import java.util.List;
 public class MovieController {
     MovieService ms = new MovieService();
     @PostMapping("/add-movie")
-    ResponseEntity<String> addMovie(@RequestBody Movie movie){
+    public ResponseEntity<String> addMovie(@RequestBody Movie movie){
         ms.addMovie(movie);
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }
     @PostMapping("/add-director")
-    ResponseEntity<String> addDirector(@RequestBody Director director) {
+    public ResponseEntity<String> addDirector(@RequestBody Director director) {
         ms.addDirector(director);
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }
     @PutMapping("/add-movie-director-pair")
-    ResponseEntity<String> addMovieDirectorPair(@RequestParam("movieName")String movieName,@RequestParam("dirName")
+    public ResponseEntity<String> addMovieDirectorPair(@RequestParam("movieName")String movieName,@RequestParam("dirName")
                                                 String dirName){
         ms.addPair(movieName,dirName);
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }
     @GetMapping("/get-movie-by-name/{name}")
-    ResponseEntity<Movie> getMovieByName(@PathVariable("name")String name){
+    public ResponseEntity<Movie> getMovieByName(@PathVariable("name")String name){
         Movie m = ms.getMovieByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(m);
     }
     @GetMapping("/get-director-by-name/{name}")
-    ResponseEntity<Director> getDirectorByName(@PathVariable("name")String name){
+    public ResponseEntity<Director> getDirectorByName(@PathVariable("name")String name){
         Director d = ms.getDirectorByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(d);
     }
     @GetMapping("/get-movies-by-director-name/{director}")
-    ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable("director")String name){
+    public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable("director")String name){
         List<String> m = ms.getMoviesByDirectorName(name);
         return ResponseEntity.status(HttpStatus.OK).body(m);
     }
     @GetMapping("/get-all-movies")
-    ResponseEntity<List<Movie>> findAllMovies(){
+    public ResponseEntity<List<Movie>> findAllMovies(){
         return ResponseEntity.status(HttpStatus.OK).body(ms.findAllMovies());
     }
     @DeleteMapping("/delete-director-by-name")
-    ResponseEntity<String> deleteDirectorByName(String name){
+    public ResponseEntity<String> deleteDirectorByName(String name){
         ms.deleteDirectorByName(name);
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }
     @DeleteMapping("/delete-all-directors")
-    ResponseEntity<String> deleteAllDirectors(){
+    public ResponseEntity<String> deleteAllDirectors(){
         ms.deleteAll();
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }

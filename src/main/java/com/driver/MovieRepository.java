@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class MovieRepository {
-    HashMap<Director,List<Movie>> hm = new HashMap<>();
-    List<Movie> listMovie = new ArrayList<>();//list of Movies
-    List<Director> listDirector = new ArrayList<>();//list of Doctor
+    private HashMap<Director,List<Movie>> hm = new HashMap<>();
+    private List<Movie> listMovie = new ArrayList<>();//list of Movies
+    private List<Director> listDirector = new ArrayList<>();//list of Doctor
 
     public List<Movie> getListMovieList(){
         return listMovie;
