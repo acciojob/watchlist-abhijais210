@@ -13,15 +13,16 @@ public class MovieService {
     //check if movie already exist in List other wise add it in to List
     @Autowired
     MovieRepository mr;
-    public  void addMovie(Movie movie) {
-        mr.addMovie(movie);
-    }
-    public  void addDirector(Director director) {
-        mr.addDirector(director);
-    }
-    public void addPair(String movieName,String dirName){
+    public  String addMovie(Movie movie) {
 
-        mr.addPair(mr.getMovieByName(movieName),mr.getDirectorByName(dirName));
+        return mr.addMovie(movie);
+    }
+    public  String addDirector(Director director) {
+        return  mr.addDirector(director);
+    }
+    public String addPair(String movieName,String dirName){
+
+        return mr.addPair(mr.getMovieByName(movieName),mr.getDirectorByName(dirName));
     }
     public Movie getMovieByName(String name){
         return mr.getMovieByName(name);
@@ -36,11 +37,11 @@ public class MovieService {
     public List<Movie> findAllMovies(){
         return mr.getListMovieList();
     }
-    public void deleteDirectorByName(String name){
+    public String deleteDirectorByName(String name){
        Director d = mr.getDirectorByName(name);
-       mr.deleteDirector(d);
+       return mr.deleteDirector(d);
     }
-    public void deleteAll(){
-        mr.deleteAll();
+    public String deleteAll(){
+        return mr.deleteAll();
     }
 }
