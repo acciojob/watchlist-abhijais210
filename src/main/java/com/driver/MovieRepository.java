@@ -1,11 +1,9 @@
-package com.driver.repository;
+package com.driver;
 
-import com.driver.model.Director;
-import com.driver.model.Movie;
+import com.driver.Director;
+import com.driver.Movie;
 
-import java.io.DataInput;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 

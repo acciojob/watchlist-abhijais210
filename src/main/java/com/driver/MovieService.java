@@ -1,10 +1,9 @@
-package com.driver.service;
+package com.driver;
 
-import com.driver.model.Director;
-import com.driver.model.Movie;
-import com.driver.repository.MovieRepository;
+import com.driver.Director;
+import com.driver.Movie;
+import com.driver.MovieRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MovieService {
