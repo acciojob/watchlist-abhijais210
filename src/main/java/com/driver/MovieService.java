@@ -3,13 +3,16 @@ package com.driver;
 import com.driver.Director;
 import com.driver.Movie;
 import com.driver.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MovieService {
 
     //check if movie already exist in List other wise add it in to List
-    public MovieRepository mr = new MovieRepository();
+    @Autowired
+    MovieRepository mr;
     public  void addMovie(Movie movie) {
         mr.addMovie(movie);
     }

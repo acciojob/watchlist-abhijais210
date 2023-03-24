@@ -2,39 +2,38 @@ package com.driver;
 
 import com.driver.Director;
 import com.driver.Movie;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+@Repository
 public class MovieRepository {
     private HashMap<Director,List<Movie>> hm = new HashMap<>();
-    private List<Movie> listMovie = new ArrayList<>();//list of Movies
-    private List<Director> listDirector = new ArrayList<>();//list of Doctor
+    private HashMap<String,Movie> movieDb = new HashMap<>();
+    private HashMap<String,Director> directorDb = new HashMap<>();
 
     public List<Movie> getListMovieList(){
-        return listMovie;
+        return new ArrayList<>(movieDb.values());
     }
-    public List<Director> getListDirector(){
-        return listDirector;
-    }
+
     public void addMovie(Movie m){
-        listMovie.add(m);
+        String key = m.getName();
+        movieDb.put(key,m);
     }
     public void addDirector(Director director){
-        listDirector.add(director);
+        String key = director.getName();
+        directorDb.put(key,director);
     }
     public Director getDirectorByName(String name){
-        for(Director d : listDirector){
-            if(d.getName().equals(name))
-                return d;
+        if(directorDb.containsKey(name)){
+            return directorDb.get(name);
         }
         return null;
     }
     public Movie getMovieByName(String name){
-        for(Movie m : listMovie){
-            if(m.getName().equals(name))
-                return m;
+        if(movieDb.containsKey(name)){
+            return movieDb.get(name);
         }
         return null;
     }
@@ -59,9 +58,18 @@ public class MovieRepository {
         return list;
     }
     public void deleteDirector(Director director){
+        List<Movie> movies = hm.get(director);
+        for(Movie m : movies){
+            movieDb.remove(m.getName());
+        }
         hm.remove(director);
+        directorDb.remove(director.getName());
+
     }
     public void deleteAll(){
+        for(Director d : hm.keySet()) {
+            deleteDirector(d);
+        }
         hm.clear();
     }
 }
