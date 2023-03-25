@@ -11,18 +11,17 @@ import java.util.List;
 public class MovieService {
 
     //check if movie already exist in List other wise add it in to List
-
-    MovieRepository mr = new MovieRepository();
-    public  String addMovie(Movie movie) {
-
-        return mr.addMovie(movie);
+    @Autowired
+    MovieRepository mr;
+    public  void addMovie(Movie movie) {
+        mr.addMovie(movie);
     }
-    public  String addDirector(Director director) {
-        return  mr.addDirector(director);
+    public  void addDirector(Director director) {
+          mr.addDirector(director);
     }
-    public String addPair(String movieName,String dirName){
+    public void addPair(String movieName,String dirName){
 
-        return mr.addPair(movieName,dirName);
+         mr.addPair(movieName,dirName);
     }
     public Movie getMovieByName(String name){
         return mr.getMovieByName(name);
@@ -38,11 +37,11 @@ public class MovieService {
     public List<Movie> findAllMovies(){
         return mr.getListMovieList();
     }
-    public String deleteDirectorByName(String name){
+    public void deleteDirectorByName(String name){
        Director d = mr.getDirectorByName(name);
-       return mr.deleteDirector(d);
+       mr.deleteDirector(d);
     }
-    public String deleteAll(){
-        return mr.deleteAll();
+    public void deleteAll(){
+         mr.deleteAll();
     }
 }

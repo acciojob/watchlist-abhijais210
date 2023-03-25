@@ -23,15 +23,13 @@ public class MovieRepository {
         return new ArrayList<>(movieDb.values());
     }
 
-    public String addMovie(Movie m){
+    public void addMovie(Movie m){
         String key = m.getName();
         movieDb.put(key,m);
-        return "added movie";
     }
-    public String addDirector(Director director){
+    public void addDirector(Director director){
         String key = director.getName();
         directorDb.put(key,director);
-        return "added dir";
     }
     public Director getDirectorByName(String name){
         if(directorDb.containsKey(name)){
@@ -45,7 +43,7 @@ public class MovieRepository {
         }
         return null;
     }
-    public String addPair(String movieName,String directorName){
+    public void addPair(String movieName,String directorName){
         if(directorDb.containsKey(directorName) && movieDb.containsKey(movieName)) {
             List<Movie> movieList = new ArrayList<>();
             Director director = getDirectorByName(directorName);
@@ -56,7 +54,6 @@ public class MovieRepository {
             movieList.add(movie);
             hm.put(director,movieList);
         }
-        return "Mapped Successfully";
     }
     public List<String> getListByDir(Director d){
         List<Movie> movieList = hm.get(d);
@@ -67,21 +64,19 @@ public class MovieRepository {
         }
         return list;
     }
-    public String deleteDirector(Director director){
+    public void deleteDirector(Director director){
         List<Movie> movies = hm.get(director);
         for(Movie m : movies){
             movieDb.remove(m.getName());
         }
         hm.remove(director);
         directorDb.remove(director.getName());
-        return "Directed deleted";
     }
-    public String deleteAll(){
+    public void deleteAll(){
         for(Director d : hm.keySet()) {
             deleteDirector(d);
         }
         hm.clear();
         directorDb.clear();
-        return "All Director deleted";
     }
 }
