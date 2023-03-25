@@ -11,8 +11,8 @@ import java.util.List;
 public class MovieService {
 
     //check if movie already exist in List other wise add it in to List
-    @Autowired
-    MovieRepository mr;
+
+    MovieRepository mr = new MovieRepository();
     public  String addMovie(Movie movie) {
 
         return mr.addMovie(movie);

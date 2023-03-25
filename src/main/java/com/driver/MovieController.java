@@ -10,8 +10,8 @@ import java.util.List;
 
 @RestController
 public class MovieController {
-    @Autowired
-    MovieService ms;
+
+    MovieService ms = new MovieService();
     @PostMapping("/movies/add-movie")
     public ResponseEntity<String> addMovie(@RequestBody Movie movie){
         String ans = ms.addMovie(movie);
