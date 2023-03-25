@@ -9,9 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 @Repository
 public class MovieRepository {
-    public HashMap<Director,List<Movie>> hm = new HashMap<>();
-    public HashMap<String,Movie> movieDb = new HashMap<>();
-    public HashMap<String,Director> directorDb = new HashMap<>();
+    private HashMap<Director,List<Movie>> hm;
+    private HashMap<String,Movie> movieDb;
+    private HashMap<String,Director> directorDb;
+
+    public MovieRepository() {
+        this.hm = new HashMap<Director,List<Movie>>();
+        this.movieDb = new HashMap<String,Movie>();
+        this.directorDb = new HashMap<String,Director>();
+    }
 
     public List<Movie> getListMovieList(){
         return new ArrayList<>(movieDb.values());
@@ -39,16 +45,16 @@ public class MovieRepository {
         }
         return null;
     }
-    public String addPair(Movie m,Director d){
-        if(hm.containsKey(d)) {
-            List<Movie> movies = hm.get(d);
-            movies.add(m);
-            hm.put(d,movies);
-        }
-        else {
-            List<Movie> movieList= new ArrayList<>();
-            movieList.add(m);
-            hm.put(d,movieList);
+    public String addPair(String movieName,String directorName){
+        if(directorDb.containsKey(directorName) && movieDb.containsKey(movieName)) {
+            List<Movie> movieList = new ArrayList<>();
+            Director director = getDirectorByName(directorName);
+            Movie movie = getMovieByName(movieName);
+            if(hm.containsKey(director)){
+                movieList = hm.get(director);
+            }
+            movieList.add(movie);
+            hm.put(director,movieList);
         }
         return "Mapped Successfully";
     }

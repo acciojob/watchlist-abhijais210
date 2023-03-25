@@ -22,7 +22,7 @@ public class MovieService {
     }
     public String addPair(String movieName,String dirName){
 
-        return mr.addPair(mr.getMovieByName(movieName),mr.getDirectorByName(dirName));
+        return mr.addPair(movieName,dirName);
     }
     public Movie getMovieByName(String name){
         return mr.getMovieByName(name);
