@@ -32,6 +32,7 @@ public class MovieService {
     }
     public List<String> getMoviesByDirectorName(String name){
        Director director = mr.getDirectorByName(name);
+        System.out.println(director.getName());
        return mr.getListByDir(director);
     }
     public List<Movie> findAllMovies(){

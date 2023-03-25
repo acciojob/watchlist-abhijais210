@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -29,18 +30,18 @@ public class MovieController {
         return new ResponseEntity<>(ans,HttpStatus.CREATED);
     }
     @GetMapping("/get-movie-by-name/{name}")
-    public ResponseEntity<Movie> getMovieByName(@PathVariable("name")String name){
+    public ResponseEntity<Movie> getMovieByName(@PathVariable String name){
         Movie m = ms.getMovieByName(name);
         return new ResponseEntity<>(m,HttpStatus.CREATED);
     }
     @GetMapping("/get-director-by-name/{name}")
-    public ResponseEntity<Director> getDirectorByName(@PathVariable("name")String name){
+    public ResponseEntity<Director> getDirectorByName(@PathVariable String name){
         Director d = ms.getDirectorByName(name);
         return new ResponseEntity<>(d,HttpStatus.CREATED);
     }
     @GetMapping("/get-movies-by-director-name/{director}")
-    public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable("director")String name){
-        List<String> m = ms.getMoviesByDirectorName(name);
+    public ResponseEntity<List<String>> getMoviesByDirectorName(@PathVariable String director){
+        List<String> m = ms.getMoviesByDirectorName(director);
         return new ResponseEntity<>(m,HttpStatus.CREATED);
     }
     @GetMapping("/get-all-movies")
@@ -49,7 +50,7 @@ public class MovieController {
         return new ResponseEntity<>(ms.findAllMovies(),HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-director-by-name")
-    public ResponseEntity<String> deleteDirectorByName(String name){
+    public ResponseEntity<String> deleteDirectorByName(@RequestParam("name")String name){
         String ans = ms.deleteDirectorByName(name);
         return new ResponseEntity<>(ans,HttpStatus.OK);
     }

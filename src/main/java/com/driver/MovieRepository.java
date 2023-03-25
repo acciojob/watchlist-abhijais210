@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 @Repository
 public class MovieRepository {
-    private HashMap<Director,List<Movie>> hm = new HashMap<>();
-    private HashMap<String,Movie> movieDb = new HashMap<>();
-    private HashMap<String,Director> directorDb = new HashMap<>();
+    public HashMap<Director,List<Movie>> hm = new HashMap<>();
+    public HashMap<String,Movie> movieDb = new HashMap<>();
+    public HashMap<String,Director> directorDb = new HashMap<>();
 
     public List<Movie> getListMovieList(){
         return new ArrayList<>(movieDb.values());
@@ -56,6 +56,7 @@ public class MovieRepository {
         List<Movie> movieList = hm.get(d);
         List<String> list  = new ArrayList<>();
         for(Movie m: movieList ){
+            System.out.println(m.getName());
             list.add(m.getName());
         }
         return list;
@@ -74,6 +75,7 @@ public class MovieRepository {
             deleteDirector(d);
         }
         hm.clear();
+        directorDb.clear();
         return "All Director deleted";
     }
 }
