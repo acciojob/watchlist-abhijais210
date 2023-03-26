@@ -30,16 +30,13 @@ public class MovieService {
         return mr.getDirectorByName(name);
     }
     public List<String> getMoviesByDirectorName(String name){
-       Director director = mr.getDirectorByName(name);
-        System.out.println(director.getName());
-       return mr.getListByDir(director);
+       return mr.getListByDir(name);
     }
-    public List<Movie> findAllMovies(){
+    public List<String> findAllMovies(){
         return mr.getListMovieList();
     }
     public void deleteDirectorByName(String name){
-       Director d = mr.getDirectorByName(name);
-       mr.deleteDirector(d);
+       mr.deleteDirector(name);
     }
     public void deleteAll(){
          mr.deleteAll();

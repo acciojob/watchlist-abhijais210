@@ -9,18 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 @Repository
 public class MovieRepository {
-    private HashMap<Director,List<Movie>> hm;
+    private HashMap<String,List<String>> hm;
     private HashMap<String,Movie> movieDb;
     private HashMap<String,Director> directorDb;
 
     public MovieRepository() {
-        this.hm = new HashMap<Director,List<Movie>>();
+        this.hm = new HashMap<String,List<String>>();
         this.movieDb = new HashMap<String,Movie>();
         this.directorDb = new HashMap<String,Director>();
     }
 
-    public List<Movie> getListMovieList(){
-        return new ArrayList<>(movieDb.values());
+    public List<String> getListMovieList(){
+        return new ArrayList<>(movieDb.keySet());
     }
 
     public void addMovie(Movie m){
@@ -45,38 +45,29 @@ public class MovieRepository {
     }
     public void addPair(String movieName,String directorName){
         if(directorDb.containsKey(directorName) && movieDb.containsKey(movieName)) {
-            List<Movie> movieList = new ArrayList<>();
-            Director director = getDirectorByName(directorName);
-            Movie movie = getMovieByName(movieName);
-            if(hm.containsKey(director)){
-                movieList = hm.get(director);
+            List<String> movieList = new ArrayList<>();
+            if(hm.containsKey(directorName)){
+                movieList = hm.get(directorName);
             }
-            movieList.add(movie);
-            hm.put(director,movieList);
+            movieList.add(movieName);
+            hm.put(directorName,movieList);
         }
     }
-    public List<String> getListByDir(Director d){
-        List<Movie> movieList = hm.get(d);
-        List<String> list  = new ArrayList<>();
-        for(Movie m: movieList ){
-            System.out.println(m.getName());
-            list.add(m.getName());
-        }
-        return list;
+    public List<String> getListByDir(String dirName){
+         return hm.get(dirName);
     }
-    public void deleteDirector(Director director){
-        List<Movie> movies = hm.get(director);
-        for(Movie m : movies){
-            movieDb.remove(m.getName());
+    public void deleteDirector(String dirName){
+        List<String> movies = hm.get(dirName);
+        for(String m : movies){
+            movieDb.remove(m);
         }
-        hm.remove(director);
-        directorDb.remove(director.getName());
+        hm.remove(dirName);
+        directorDb.remove(dirName);
     }
     public void deleteAll(){
-        for(Director d : hm.keySet()) {
+        for(String d : hm.keySet()) {
             deleteDirector(d);
         }
-        hm.clear();
         directorDb.clear();
     }
 }
